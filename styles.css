@@ -273,6 +273,36 @@ footer {
   gap: 0.9rem;
 }
 
+.url-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.url-card {
+  display: grid;
+  align-content: start;
+  min-height: 13rem;
+  padding: 1rem;
+  text-decoration: none;
+}
+
+.url-card span {
+  color: var(--blue);
+  font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.url-card strong {
+  margin-top: 0.7rem;
+  font-size: 1.2rem;
+}
+
+.url-card p {
+  color: var(--muted);
+}
+
 .card,
 .two-column,
 .table-wrap,
@@ -406,6 +436,43 @@ td {
   gap: 0.8rem;
 }
 
+.page-main {
+  width: min(960px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 6rem) 0;
+}
+
+.page-main > article {
+  display: grid;
+  gap: 1.2rem;
+}
+
+.page-main h1 {
+  max-width: 14ch;
+}
+
+.page-main .lead {
+  max-width: 48rem;
+  color: var(--muted);
+  font-size: 1.18rem;
+}
+
+.content-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: clamp(1rem, 3vw, 1.5rem);
+}
+
+.content-panel h2 {
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+
+.content-panel li {
+  margin: 0.65rem 0;
+  color: var(--muted);
+}
+
 details {
   padding: 1rem 1.15rem;
 }
@@ -453,6 +520,10 @@ footer {
   .intent-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .url-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 560px) {
@@ -482,6 +553,7 @@ footer {
   }
 
   .intent-grid,
+  .url-grid,
   .layout-grid {
     grid-template-columns: 1fr;
   }
