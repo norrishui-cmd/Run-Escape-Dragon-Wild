@@ -1,0 +1,22 @@
+{
+  "name": "Dragonwilds Field Guide",
+  "short_name": "Dragonwilds",
+  "description": "Unofficial RuneScape: Dragonwilds guide for beginners, crafting, skills, base building, and boss prep.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0d1210",
+  "theme_color": "#14221d",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
