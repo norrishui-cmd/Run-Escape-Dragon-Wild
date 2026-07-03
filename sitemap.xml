@@ -7,37 +7,61 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://runescapedragonwilds.wiki/beginner-guide.html</loc>
+    <loc>https://runescapedragonwilds.wiki/beginner-guide/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://runescapedragonwilds.wiki/crafting-resources/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://runescapedragonwilds.wiki/crafting-resources.html</loc>
+    <loc>https://runescapedragonwilds.wiki/resources/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://runescapedragonwilds.wiki/map/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://runescapedragonwilds.wiki/skills-builds.html</loc>
+    <loc>https://runescapedragonwilds.wiki/skills-builds/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.84</priority>
   </url>
   <url>
-    <loc>https://runescapedragonwilds.wiki/boss-prep.html</loc>
+    <loc>https://runescapedragonwilds.wiki/weapons-armor/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://runescapedragonwilds.wiki/base-building.html</loc>
+    <loc>https://runescapedragonwilds.wiki/boss-prep/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.75</priority>
+    <priority>0.82</priority>
   </url>
   <url>
-    <loc>https://runescapedragonwilds.wiki/about.html</loc>
+    <loc>https://runescapedragonwilds.wiki/base-building/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://runescapedragonwilds.wiki/updates/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://runescapedragonwilds.wiki/about/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>

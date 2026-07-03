@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    { "source": "/beginner-guide.html", "destination": "/beginner-guide/", "permanent": true },
+    { "source": "/crafting-resources.html", "destination": "/crafting-resources/", "permanent": true },
+    { "source": "/skills-builds.html", "destination": "/skills-builds/", "permanent": true },
+    { "source": "/boss-prep.html", "destination": "/boss-prep/", "permanent": true },
+    { "source": "/base-building.html", "destination": "/base-building/", "permanent": true },
+    { "source": "/about.html", "destination": "/about/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/sitemap.xml",
+      "headers": [{ "key": "Content-Type", "value": "application/xml; charset=utf-8" }]
+    },
+    {
+      "source": "/robots.txt",
+      "headers": [{ "key": "Content-Type", "value": "text/plain; charset=utf-8" }]
+    }
+  ]
+}
