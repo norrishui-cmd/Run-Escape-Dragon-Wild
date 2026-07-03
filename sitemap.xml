@@ -25,6 +25,12 @@
     <priority>0.88</priority>
   </url>
   <url>
+    <loc>https://runescapedragonwilds.wiki/recipes/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.87</priority>
+  </url>
+  <url>
     <loc>https://runescapedragonwilds.wiki/map/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
@@ -43,16 +49,34 @@
     <priority>0.82</priority>
   </url>
   <url>
+    <loc>https://runescapedragonwilds.wiki/quests/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
     <loc>https://runescapedragonwilds.wiki/boss-prep/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.82</priority>
   </url>
   <url>
+    <loc>https://runescapedragonwilds.wiki/fishing/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://runescapedragonwilds.wiki/base-building/</loc>
     <lastmod>2026-07-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.78</priority>
+  </url>
+  <url>
+    <loc>https://runescapedragonwilds.wiki/co-op/</loc>
+    <lastmod>2026-07-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.76</priority>
   </url>
   <url>
     <loc>https://runescapedragonwilds.wiki/updates/</loc>
