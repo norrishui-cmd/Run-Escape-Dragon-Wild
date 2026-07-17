@@ -15,6 +15,18 @@
   --shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
 }
 
+.breadcrumbs { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:0 0 1rem; color:var(--muted); font-size:.9rem; }
+.breadcrumbs a { color:var(--accent); }
+.quick-answer { margin:1.25rem 0; padding:1.2rem 1.35rem; border-left:4px solid var(--accent); border-radius:0 12px 12px 0; background:rgba(255,255,255,.055); }
+.quick-answer h2 { margin-top:0; font-size:1.05rem; }
+.source-box { margin:1.5rem 0; padding:1rem 1.25rem; border:1px solid rgba(255,255,255,.14); border-radius:12px; background:rgba(0,0,0,.18); }
+.source-box h2 { margin-top:0; font-size:1.05rem; }
+.source-box p,.source-box li { font-size:.93rem; }
+.site-footer { max-width:1180px; margin:2rem auto 0; padding:1.5rem 1.25rem 2.5rem; color:var(--muted); border-top:1px solid rgba(255,255,255,.12); font-size:.88rem; }
+.table-wrap { overflow-x:auto; }
+.table-wrap table { width:100%; border-collapse:collapse; }
+.table-wrap th,.table-wrap td { padding:.75rem; border:1px solid rgba(255,255,255,.14); text-align:left; }
+
 * {
   box-sizing: border-box;
 }
