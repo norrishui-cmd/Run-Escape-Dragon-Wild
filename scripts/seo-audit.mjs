@@ -27,6 +27,21 @@ for (const url of urls) {
   if (canonical !== `https://runescapedragonwilds.wiki${url}`) failures.push(`${url}: canonical mismatch (${canonical})`);
   if (words < 120) warnings.push(`${url}: thin body (${words} words)`);
   if (!/application\/ld\+json/i.test(html)) warnings.push(`${url}: no structured data`);
+  for (const block of html.matchAll(/<script type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)) {
+    try { JSON.parse(block[1]); } catch { failures.push(`${url}: invalid JSON-LD`); }
+  }
+  if (/^\/(combat|systems|skills|buildings|equipment|enemies|mounts|troubleshooting)\//.test(url) || /^\/(quests|dedicated-servers)\/.+\/$/.test(url) || url === '/scorned-wilderness/') {
+    if (!/class=["']quick-answer["']/.test(html)) failures.push(`${url}: missing concrete quick answer`);
+    if (words < 150) failures.push(`${url}: Phase 2 page is too thin (${words} words)`);
+  }
+  const paragraphs = [...html.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map((item) => text(item[1]).toLowerCase())
+    .filter((paragraph) => paragraph.length >= 100 && !paragraph.includes('unofficial fan resource') && !paragraph.includes('official details on this page were checked'));
+  const paragraphSet = new Set();
+  for (const paragraph of paragraphs) {
+    if (paragraphSet.has(paragraph)) failures.push(`${url}: repeated substantive paragraph`);
+    paragraphSet.add(paragraph);
+  }
   for (const [key, value] of Object.entries({ title, description, canonical })) {
     if (!value) continue;
     if (seen[key].has(value)) failures.push(`${url}: duplicate ${key} with ${seen[key].get(value)}`);

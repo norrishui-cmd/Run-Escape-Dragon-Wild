@@ -257,8 +257,8 @@ const hubEnhancements = {
 for (const [slug, enhancement] of Object.entries(hubEnhancements)) {
   const target = path.join(root, slug, 'index.html');
   let html = fs.readFileSync(target, 'utf8');
-  html = html.replace(/\s*<section class="phase1-enhancement">[\s\S]*<\/section>\s*(?=<\/article>)/, '');
   const wrapped = `<section class="phase1-enhancement">${enhancement}</section>`;
+  html = html.split(wrapped).join('');
   html = html.replace('</article>', `${wrapped}</article>`);
   if (!/application\/ld\+json/i.test(html)) {
     const schema = JSON.stringify({ '@context': 'https://schema.org', '@type': 'CollectionPage', name: html.match(/<h1[^>]*>(.*?)<\/h1>/i)?.[1] || slug, url: `${site}/${slug}/`, dateModified: updated });

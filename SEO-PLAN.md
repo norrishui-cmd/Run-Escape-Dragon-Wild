@@ -3,6 +3,13 @@
 Updated: 2026-07-17  
 Target milestone: 2,000+ quality-approved canonical URLs before the announced September 15, 2026 version 1.0 release.
 
+## Current progress
+
+- Round 1: 23 → 38 canonical URLs; technical foundation and first current-intent cluster.
+- Round 2: 38 → 72 canonical URLs; 0.12 systems plus clearly labelled 0.12.1/1.0 content.
+- Round 3: 72 → 93 canonical URLs; exact quest blockers, fixed bugs and dedicated-server operations.
+- Next evidence gate: live map landmarks, Constitution Shrines, Engrams, recipes with quantities, enemy weaknesses and drops.
+
 ## Strategic position
 
 The official Dragonwilds Wiki is the strongest database competitor. This site should not try to win with copied definitions. Its opportunity is player-problem SEO: direct answers, progression routes, quest stuck points, safe farming loops, update impact pages, server/platform troubleshooting, and comparisons that connect several database facts into an action.

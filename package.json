@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "generate": "node scripts/generate-phase1.mjs",
+    "generate": "node scripts/generate-phase1.mjs && node scripts/generate-phase2.mjs && node scripts/generate-phase3.mjs",
     "audit:seo": "node scripts/seo-audit.mjs",
     "build": "npm run generate && npm run audit:seo"
   }
