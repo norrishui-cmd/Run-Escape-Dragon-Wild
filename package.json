@@ -1,10 +1,11 @@
 {
-  "name": "nivalis-nights-wiki",
+  "name": "runescape-dragonwilds-field-guide",
   "private": true,
   "type": "module",
   "scripts": {
-    "generate": "node scripts/generate-pages.mjs && node scripts/generate-i18n.mjs && node scripts/configure-adsense.mjs",
-    "audit": "node scripts/seo-audit.mjs",
-    "build": "npm run generate && npm run audit"
+    "prebuild": "node scripts/project-guard.mjs",
+    "generate": "node scripts/generate-phase1.mjs && node scripts/generate-phase2.mjs && node scripts/generate-phase3.mjs && node scripts/generate-locales.mjs && node scripts/configure-adsense.mjs",
+    "audit:seo": "node scripts/seo-audit.mjs",
+    "build": "npm run generate && npm run audit:seo"
   }
 }

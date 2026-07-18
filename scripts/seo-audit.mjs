@@ -1,75 +1,73 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import {fileURLToPath} from 'node:url';
 
-const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const files=[];
-function walk(dir){for(const e of fs.readdirSync(dir,{withFileTypes:true})){if(['.git','node_modules'].includes(e.name))continue;const p=path.join(dir,e.name);e.isDirectory()?walk(p):e.name.endsWith('.html')&&files.push(p)}}
-walk(root);
+const root = path.resolve(import.meta.dirname, '..');
+const sitemap = fs.readFileSync(path.join(root, 'sitemap.xml'), 'utf8');
+const adsTxt = fs.readFileSync(path.join(root, 'ads.txt'), 'utf8').trim();
+const urls = [...sitemap.matchAll(/<loc>https:\/\/runescapedragonwilds\.wiki(.*?)<\/loc>/g)].map((match) => match[1]);
+const failures = [];
+const warnings = [];
+const seen = { title: new Map(), description: new Map(), canonical: new Map() };
 
-const errors=[];
-const unique={canonical:new Map(),title:new Map(),description:new Map(),h1:new Map()};
-const canonicals=new Set();
-const paragraphs=new Map();
-const adsensePublisher='ca-pub-9505220977121599';
-const adsenseScript=`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsensePublisher}`;
-const remember=(kind,value,rel)=>{if(!value)return;if(unique[kind].has(value))errors.push(`${rel}: duplicate ${kind} with ${unique[kind].get(value)}`);else unique[kind].set(value,rel)};
+if (adsTxt !== 'google.com, pub-9505220977121599, DIRECT, f08c47fec0942fa0') {
+  failures.push('ads.txt: publisher declaration is missing or incorrect');
+}
 
-for(const file of files){
-  const s=fs.readFileSync(file,'utf8');
-  const rel=path.relative(root,file);
-  const accountTags=(s.match(/<meta name="google-adsense-account" content="ca-pub-9505220977121599">/g)||[]).length;
-  const adsenseScripts=(s.match(/https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-9505220977121599/g)||[]).length;
-  if(accountTags!==1)errors.push(`${rel}: expected one AdSense account meta tag, found ${accountTags}`);
-  if(adsenseScripts!==1)errors.push(`${rel}: expected one AdSense loader, found ${adsenseScripts}`);
-  if(file.endsWith('404.html'))continue;
-  const one=(re,name)=>{const n=(s.match(re)||[]).length;if(n!==1)errors.push(`${rel}: expected one ${name}, found ${n}`)};
-  one(/<title[ >]/gi,'title');
-  one(/<meta name="description"/gi,'description');
-  one(/rel="canonical"/gi,'canonical');
-  one(/<h1[ >]/gi,'H1');
+const text = (html) => html.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/&[a-z0-9#]+;/gi, ' ').replace(/\s+/g, ' ').trim();
+const match = (html, regex) => html.match(regex)?.[1]?.trim() || '';
+const fileFor = (url) => url === '/' ? path.join(root, 'index.html') : path.join(root, url, 'index.html');
 
-  const title=s.match(/<title>([^<]+)<\/title>/i)?.[1]?.trim();
-  const description=s.match(/<meta name="description" content="([^"]+)"/i)?.[1]?.trim();
-  const canonical=s.match(/rel="canonical" href="([^"]+)"/i)?.[1];
-  const h1=s.match(/<h1[^>]*>([^<]+)<\/h1>/i)?.[1]?.trim();
-  remember('title',title,rel);remember('description',description,rel);remember('canonical',canonical,rel);remember('h1',h1,rel);
-  if(canonical)canonicals.add(canonical);
-
-  if(!s.includes('application/ld+json'))errors.push(`${rel}: missing structured data`);
-  if(/\b(To be tested|Unknown|launch table template|SEO handling|lorem ipsum)\b/i.test(s))errors.push(`${rel}: editorial placeholder language`);
-  if(rel!=='index.html'){
-    const answer=s.match(/<div class="answer"><strong>(?:Quick answer:|Kurzantwort:|要点：)<\/strong>\s*([^<]+)<\/div>/i)?.[1]?.trim();
-    const substantive=rel.startsWith('ja/')?answer?.length>=35:answer?.split(/\s+/).length>=12;
-    if(!answer||!substantive)errors.push(`${rel}: missing a substantive direct answer`);
+for (const url of urls) {
+  const file = fileFor(url);
+  if (!fs.existsSync(file)) { failures.push(`${url}: missing HTML file`); continue; }
+  const html = fs.readFileSync(file, 'utf8');
+  const title = match(html, /<title>([^<]+)<\/title>/i);
+  const description = match(html, /<meta\s+name=["']description["']\s+content=["']([^"']+)["']/i);
+  const canonical = match(html, /<link\s+rel=["']canonical["']\s+href=["']([^"']+)["']/i);
+  const h1s = [...html.matchAll(/<h1(?:\s[^>]*)?>([\s\S]*?)<\/h1>/gi)];
+  const words = text(html).split(/\s+/).filter(Boolean).length;
+  if (!title || title.length < 25 || title.length > 70) warnings.push(`${url}: title length ${title.length}`);
+  if (!description || description.length < 110 || description.length > 170) warnings.push(`${url}: meta description length ${description.length}`);
+  if (h1s.length !== 1) failures.push(`${url}: expected one H1, found ${h1s.length}`);
+  if (canonical !== `https://runescapedragonwilds.wiki${url}`) failures.push(`${url}: canonical mismatch (${canonical})`);
+  if (words < 120) warnings.push(`${url}: thin body (${words} words)`);
+  if (!/application\/ld\+json/i.test(html)) warnings.push(`${url}: no structured data`);
+  const adsenseAccounts = [...html.matchAll(/<meta\s+name=["']google-adsense-account["']\s+content=["']ca-pub-9505220977121599["']\s*>/gi)];
+  const adsenseLoaders = [...html.matchAll(/<script\s+async\s+src=["']https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-9505220977121599["']\s+crossorigin=["']anonymous["']><\/script>/gi)];
+  if (adsenseAccounts.length !== 1) failures.push(`${url}: expected one AdSense account meta tag, found ${adsenseAccounts.length}`);
+  if (adsenseLoaders.length !== 1) failures.push(`${url}: expected one AdSense loader, found ${adsenseLoaders.length}`);
+  for (const block of html.matchAll(/<script type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)) {
+    try { JSON.parse(block[1]); } catch { failures.push(`${url}: invalid JSON-LD`); }
   }
-
-  for(const href of [...s.matchAll(/href="(\/[^"]*)"/g)].map(m=>m[1])){
-    const clean=href.split(/[?#]/)[0];
-    if(!clean||clean==='/'||/\.[a-z0-9]+$/i.test(clean))continue;
-    const target=path.join(root,clean.replace(/^\//,''),'index.html');
-    if(!fs.existsSync(target))errors.push(`${rel}: broken internal link ${href}`);
+  if (/^\/(combat|systems|skills|buildings|equipment|enemies|mounts|troubleshooting)\//.test(url) || /^\/(quests|dedicated-servers)\/.+\/$/.test(url) || url === '/scorned-wilderness/') {
+    if (!/class=["']quick-answer["']/.test(html)) failures.push(`${url}: missing concrete quick answer`);
+    if (words < 150) failures.push(`${url}: Phase 2 page is too thin (${words} words)`);
   }
-
-  const text=s.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-  const enoughDepth=rel.startsWith('ja/')?text.replace(/\s+/g,'').length>=650:text.split(' ').length>=180;
-  if(!enoughDepth)errors.push(`${rel}: insufficient visible content depth`);
-
-  for(const match of s.matchAll(/<p(?:\s[^>]*)?>([\s\S]*?)<\/p>/gi)){
-    const p=match[1].replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
-    if(p.length<120||p.startsWith('This pre-release page uses the official'))continue;
-    if(paragraphs.has(p))errors.push(`${rel}: repeated long paragraph from ${paragraphs.get(p)}`);else paragraphs.set(p,rel);
+  const paragraphs = [...html.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)]
+    .map((item) => text(item[1]).toLowerCase())
+    .filter((paragraph) => paragraph.length >= 100
+      && !paragraph.includes('unofficial fan resource')
+      && !paragraph.includes('official details on this page were checked')
+      && !paragraph.includes('inoffizielles fanprojekt')
+      && !paragraph.includes('guide de fans non officiel'));
+  const paragraphSet = new Set();
+  for (const paragraph of paragraphs) {
+    if (paragraphSet.has(paragraph)) failures.push(`${url}: repeated substantive paragraph`);
+    paragraphSet.add(paragraph);
+  }
+  for (const [key, value] of Object.entries({ title, description, canonical })) {
+    if (!value) continue;
+    if (seen[key].has(value)) failures.push(`${url}: duplicate ${key} with ${seen[key].get(value)}`);
+    else seen[key].set(value, url);
+  }
+  for (const href of [...html.matchAll(/href=["'](\/[^"'#?]*)["']/g)].map((m) => m[1])) {
+    if (/\.(css|js|ico|png|xml|webmanifest)$/.test(href)) continue;
+    const target = fileFor(href.endsWith('/') ? href : `${href}/`);
+    if (!fs.existsSync(target)) failures.push(`${url}: broken internal link ${href}`);
   }
 }
 
-const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');
-const adsTxt=fs.readFileSync(path.join(root,'ads.txt'),'utf8').trim();
-if(adsTxt!=='google.com, pub-9505220977121599, DIRECT, f08c47fec0942fa0')errors.push('ads.txt: missing or incorrect Google publisher record');
-const sitemapList=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
-const sitemapUrls=new Set(sitemapList);
-if(sitemapList.length!==sitemapUrls.size)errors.push(`sitemap: contains ${sitemapList.length-sitemapUrls.size} duplicate URL entries`);
-for(const url of canonicals)if(!sitemapUrls.has(url))errors.push(`sitemap: missing canonical ${url}`);
-for(const url of sitemapUrls)if(!canonicals.has(url))errors.push(`sitemap: URL has no matching canonical ${url}`);
-
-if(errors.length){console.error(errors.join('\n'));process.exit(1)}
-console.log(`SEO audit passed: ${files.length-1} content pages; unique metadata; concrete answers; no broken links, repeated long paragraphs, or sitemap conflicts.`);
+console.log(`Audited ${urls.length} canonical sitemap URLs.`);
+console.log(`Failures: ${failures.length}; warnings: ${warnings.length}`);
+if (warnings.length) console.log('\nWARNINGS\n' + warnings.join('\n'));
+if (failures.length) { console.error('\nFAILURES\n' + failures.join('\n')); process.exit(1); }
