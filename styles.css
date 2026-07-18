@@ -15,6 +15,10 @@
   --shadow: 0 22px 70px rgba(0, 0, 0, 0.35);
 }
 
+.language-switcher { display: flex; gap: .4rem; align-items: center; margin-left: auto; }
+.language-switcher a { border: 1px solid rgba(255,255,255,.28); border-radius: 999px; padding: .3rem .55rem; font-size: .78rem; text-decoration: none; }
+.language-switcher a[aria-current="page"] { background: #e4b75d; color: #19140d; border-color: #e4b75d; font-weight: 700; }
+
 .breadcrumbs { display:flex; flex-wrap:wrap; gap:.5rem; align-items:center; margin:0 0 1rem; color:var(--muted); font-size:.9rem; }
 .breadcrumbs a { color:var(--accent); }
 .quick-answer { margin:1.25rem 0; padding:1.2rem 1.35rem; border-left:4px solid var(--accent); border-radius:0 12px 12px 0; background:rgba(255,255,255,.055); }

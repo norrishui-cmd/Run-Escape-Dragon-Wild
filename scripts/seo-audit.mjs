@@ -36,7 +36,11 @@ for (const url of urls) {
   }
   const paragraphs = [...html.matchAll(/<p[^>]*>([\s\S]*?)<\/p>/gi)]
     .map((item) => text(item[1]).toLowerCase())
-    .filter((paragraph) => paragraph.length >= 100 && !paragraph.includes('unofficial fan resource') && !paragraph.includes('official details on this page were checked'));
+    .filter((paragraph) => paragraph.length >= 100
+      && !paragraph.includes('unofficial fan resource')
+      && !paragraph.includes('official details on this page were checked')
+      && !paragraph.includes('inoffizielles fanprojekt')
+      && !paragraph.includes('guide de fans non officiel'));
   const paragraphSet = new Set();
   for (const paragraph of paragraphs) {
     if (paragraphSet.has(paragraph)) failures.push(`${url}: repeated substantive paragraph`);
