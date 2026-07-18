@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://runescapedragonwilds.wiki/sitemap.xml
+Sitemap: https://nivalisnights.wiki/sitemap.xml
+Host: nivalisnights.wiki
+
