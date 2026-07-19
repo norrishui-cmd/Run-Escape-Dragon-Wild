@@ -11,7 +11,7 @@ if (packageJson.name !== 'runescape-dragonwilds-field-guide') {
   failures.push(`unexpected package name: ${packageJson.name || '(missing)'}`);
 }
 
-for (const required of ['generate-phase1.mjs', 'generate-phase2.mjs', 'generate-phase3.mjs', 'generate-locales.mjs', 'generate-tab-news.mjs', 'generate-faq.mjs', 'generate-game-database.mjs', 'configure-adsense.mjs']) {
+for (const required of ['generate-phase1.mjs', 'generate-phase2.mjs', 'generate-phase3.mjs', 'generate-locales.mjs', 'generate-tab-news.mjs', 'generate-faq.mjs', 'generate-game-database.mjs', 'generate-database-locales.mjs', 'configure-adsense.mjs']) {
   if (!fs.existsSync(path.join(root, 'scripts', required))) failures.push(`missing required generator: scripts/${required}`);
 }
 

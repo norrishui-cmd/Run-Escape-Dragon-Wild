@@ -47,6 +47,10 @@ for (const slug of ['fuzan','fight-cave','nightmare-crucible','mounts/magic-carp
   const html = fs.readFileSync(path.join(root,slug,'index.html'),'utf8');
   if (!html.includes('GAME_DATABASE_START')) failures.push(`${slug}: missing database enhancement`);
 }
+for (const route of databaseRoutes) for (const lang of ['de','fr']) {
+  const localized = `/${lang}${route}`;
+  if (!urls.includes(localized)) failures.push(`Localization: missing ${localized}`);
+}
 
 for (const url of urls) {
   const file = fileFor(url);
@@ -63,6 +67,7 @@ for (const url of urls) {
   if (canonical !== `https://runescapedragonwilds.wiki${url}`) failures.push(`${url}: canonical mismatch (${canonical})`);
   if (words < 120) warnings.push(`${url}: thin body (${words} words)`);
   if (!/application\/ld\+json/i.test(html)) warnings.push(`${url}: no structured data`);
+  if (!/class=["']language-dropdown["']/.test(html)) failures.push(`${url}: missing navigation language dropdown`);
   const adsenseAccounts = [...html.matchAll(/<meta\s+name=["']google-adsense-account["']\s+content=["']ca-pub-9505220977121599["']\s*>/gi)];
   const adsenseLoaders = [...html.matchAll(/<script\s+async\s+src=["']https:\/\/pagead2\.googlesyndication\.com\/pagead\/js\/adsbygoogle\.js\?client=ca-pub-9505220977121599["']\s+crossorigin=["']anonymous["']><\/script>/gi)];
   if (adsenseAccounts.length !== 1) failures.push(`${url}: expected one AdSense account meta tag, found ${adsenseAccounts.length}`);
