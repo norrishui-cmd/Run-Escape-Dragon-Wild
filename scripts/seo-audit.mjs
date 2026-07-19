@@ -32,6 +32,22 @@ for (const tab of ['guides','quests','resources','skills-builds','troubleshootin
 }
 for (const anchor of faqAnchors) if (!linkedFaqs.has(anchor)) failures.push(`FAQ: #${anchor} has no related tab entry link`);
 
+const databaseRoutes = ['/database/','/characters/','/characters/kuldra/','/characters/icthlarin/','/factions/','/factions/moon-garou/','/factions/kothaar/','/items/','/items/adamant-weapons/','/items/adamant-tools/','/items/engrams/','/items/ascension-cores/','/items/fire-cape/','/items/dragon-rewards/','/modes/','/modes/creative-mode/','/modes/custom-worlds/','/modes/kuldra-raid/','/demo/'];
+for (const route of databaseRoutes) {
+  if (!urls.includes(route)) failures.push(`Database: missing canonical route ${route}`);
+  const file = fileFor(route);
+  if (!fs.existsSync(file)) continue;
+  const html = fs.readFileSync(file,'utf8');
+  if (!/class=["']quick-answer["']/.test(html)) failures.push(`${route}: missing database quick answer`);
+  if (!/Official sources and data status/.test(html)) failures.push(`${route}: missing official-source status block`);
+}
+const demoHtml = fs.existsSync(path.join(root,'demo','index.html')) ? fs.readFileSync(path.join(root,'demo','index.html'),'utf8') : '';
+if (!demoHtml.includes('reviewed 2026-07-19') || !demoHtml.includes('does not list a public Dragonwilds demo')) failures.push('Demo: missing dated, qualified availability status');
+for (const slug of ['fuzan','fight-cave','nightmare-crucible','mounts/magic-carpet','adamant-gear','equipment/infinity-robes','equipment/vestige-armour-sets','equipment/yew-weapons','red-dragonhide']) {
+  const html = fs.readFileSync(path.join(root,slug,'index.html'),'utf8');
+  if (!html.includes('GAME_DATABASE_START')) failures.push(`${slug}: missing database enhancement`);
+}
+
 for (const url of urls) {
   const file = fileFor(url);
   if (!fs.existsSync(file)) { failures.push(`${url}: missing HTML file`); continue; }

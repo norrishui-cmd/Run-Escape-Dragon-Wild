@@ -12,6 +12,9 @@
   <url><loc>https://runescapedragonwilds.wiki/buildings/fermentation-barrel/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/buildings/lumber-storage/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/buildings/ore-stone-storage/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/characters/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/characters/icthlarin/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/characters/kuldra/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/co-op/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/combat/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/combat/0-12-1-rework/</loc><lastmod>2026-07-19</lastmod></url>
@@ -21,6 +24,7 @@
   <url><loc>https://runescapedragonwilds.wiki/consoles/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/crafting-resources/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/crafting-stations/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/database/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/de/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/de/about/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/de/beginner-guide/</loc><lastmod>2026-07-19</lastmod></url>
@@ -48,6 +52,7 @@
   <url><loc>https://runescapedragonwilds.wiki/dedicated-servers/splinter-crash/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/dedicated-servers/stations-disappearing/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/dedicated-servers/version-mismatch/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/demo/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/dungeons-vaults/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/early-access-roadmap/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/enemies/</loc><lastmod>2026-07-19</lastmod></url>
@@ -60,6 +65,9 @@
   <url><loc>https://runescapedragonwilds.wiki/equipment/lumber-backpack/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/equipment/vestige-armour-sets/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/equipment/yew-weapons/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/factions/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/factions/kothaar/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/factions/moon-garou/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/faq/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/fight-cave/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/fishing/</loc><lastmod>2026-07-19</lastmod></url>
@@ -87,7 +95,18 @@
   <url><loc>https://runescapedragonwilds.wiki/guides/news/dedicated-server-options/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/guides/news/health-food-rework-explained/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/guides/news/switch-2-launch-date/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/items/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/items/adamant-tools/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/items/adamant-weapons/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/items/ascension-cores/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/items/dragon-rewards/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/items/engrams/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/items/fire-cape/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/map/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/modes/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/modes/creative-mode/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/modes/custom-worlds/</loc><lastmod>2026-07-19</lastmod></url>
+  <url><loc>https://runescapedragonwilds.wiki/modes/kuldra-raid/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/mounts/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/mounts/magic-carpet/</loc><lastmod>2026-07-19</lastmod></url>
   <url><loc>https://runescapedragonwilds.wiki/nightmare-crucible/</loc><lastmod>2026-07-19</lastmod></url>

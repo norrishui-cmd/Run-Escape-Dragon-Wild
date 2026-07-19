@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "prebuild": "node scripts/project-guard.mjs",
-    "generate": "node scripts/generate-phase1.mjs && node scripts/generate-phase2.mjs && node scripts/generate-phase3.mjs && node scripts/generate-locales.mjs && node scripts/generate-tab-news.mjs && node scripts/generate-faq.mjs && node scripts/configure-adsense.mjs",
+    "generate": "node scripts/generate-phase1.mjs && node scripts/generate-phase2.mjs && node scripts/generate-phase3.mjs && node scripts/generate-locales.mjs && node scripts/generate-tab-news.mjs && node scripts/generate-faq.mjs && node scripts/generate-game-database.mjs && node scripts/configure-adsense.mjs",
     "audit:seo": "node scripts/seo-audit.mjs",
     "build": "npm run generate && npm run audit:seo"
   }
