@@ -17,6 +17,21 @@ const text = (html) => html.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(
 const match = (html, regex) => html.match(regex)?.[1]?.trim() || '';
 const fileFor = (url) => url === '/' ? path.join(root, 'index.html') : path.join(root, url, 'index.html');
 
+const faqHtml = fs.readFileSync(path.join(root, 'faq', 'index.html'), 'utf8');
+const faqAnchors = [...faqHtml.matchAll(/<details class=["']faq-item["'] id=["']([^"']+)["']/g)].map((item) => item[1]);
+if (faqAnchors.length !== 50 || new Set(faqAnchors).size !== 50) failures.push(`FAQ: expected 50 unique visible questions, found ${faqAnchors.length}`);
+const faqGraphs = [...faqHtml.matchAll(/<script type=["']application\/ld\+json["']>([\s\S]*?)<\/script>/gi)].map((block) => {
+  try { return JSON.parse(block[1]); } catch { return null; }
+});
+const faqSchema = faqGraphs.find((graph) => graph?.['@type'] === 'FAQPage');
+if (faqSchema?.mainEntity?.length !== 50) failures.push(`FAQ: expected 50 schema questions, found ${faqSchema?.mainEntity?.length || 0}`);
+const linkedFaqs = new Set();
+for (const tab of ['guides','quests','resources','skills-builds','troubleshooting','updates']) {
+  const hub = fs.readFileSync(path.join(root,tab,'index.html'),'utf8');
+  for (const item of hub.matchAll(/href=["']\/faq\/#([^"']+)["']/g)) linkedFaqs.add(item[1]);
+}
+for (const anchor of faqAnchors) if (!linkedFaqs.has(anchor)) failures.push(`FAQ: #${anchor} has no related tab entry link`);
+
 for (const url of urls) {
   const file = fileFor(url);
   if (!fs.existsSync(file)) { failures.push(`${url}: missing HTML file`); continue; }
